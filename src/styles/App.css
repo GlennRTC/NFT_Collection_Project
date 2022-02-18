@@ -84,8 +84,8 @@
   border: 20px solid #EAF0F6;
   border-radius: 50%;
   border-top: 20px solid #FF7A59;
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
   animation: spinner 4s linear infinite;
 }
 

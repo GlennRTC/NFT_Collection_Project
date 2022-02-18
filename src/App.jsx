@@ -15,6 +15,7 @@ const CONTRACT_ADDRESS = "0x37AA1576b7450E9AB010D8fBCba11D9E0a727370";
 const App = () => {
 
     const [currentAccount, setCurrentAccount] = useState("");
+    const [minting, setminting] = useState("");
     
     const checkIfWalletIsConnected = async () => {
       const { ethereum } = window;
@@ -109,6 +110,7 @@ const App = () => {
         await nftTxn.wait();
         console.log(nftTxn);
         console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`);
+        setminting(false);
 
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -129,7 +131,8 @@ const App = () => {
   );
 
   const renderMintUI = () => (
-    <button onClick={askContractToMintNft} className="cta-button connect-wallet-button">
+    <button onClick={() => {askContractToMintNft();
+    setminting(true)}} className="cta-button connect-wallet-button">
       Mint NFT
     </button>
   )
@@ -144,7 +147,7 @@ const App = () => {
           </p>
           {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
         </div>
-        <div class="loader"></div>
+        {minting ? <div class="loader"></div>:null}
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
           <a
